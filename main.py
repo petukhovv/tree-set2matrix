@@ -17,18 +17,20 @@ parser.add_argument('-n', nargs='*', default=[1, 2, 3], help='n for collect n-gr
 parser.add_argument('--stage', '-s', choices=['asts2vectors', 'sparse_transformation', 'normalize', 'collect_statistic'])
 args = parser.parse_args()
 
-input_folder = args.input_folder[0]
 output_folder = args.output_folder[0]
 stage = args.stage
 
 if stage == 'asts2vectors':
+    input_folder = args.input_folder[0]
     ast2vec_path = args.ast2vec_path[0]
     asts2vectors(input_folder, output_folder, ast2vec_path)
 elif stage == 'sparse_transformation':
+    input_folder = args.input_folder[0]
     sparse_format = args.sparse_format[0]
     all_features_file = args.all_features_file[0]
     sparse_transform(input_folder, output_folder, all_features_file, sparse_format)
 elif stage == 'normalize':
+    input_folder = args.input_folder[0]
     all_features_file = args.all_features_file[0]
     normalize(input_folder, output_folder, all_features_file)
 elif stage == 'collect_statistic':
