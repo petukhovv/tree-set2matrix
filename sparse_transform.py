@@ -23,7 +23,7 @@ def sparse_transform(input_folder, output_folder, all_features_file, sparse_form
                 if feature not in features:
                     features[feature] = 0
 
-            if sparse_format == 'matrix':
+            if sparse_format == 'list':
                 feature_values = [value for (key, value) in sorted(features.items())]
             else:
                 feature_values = features
