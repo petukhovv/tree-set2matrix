@@ -1,10 +1,11 @@
+import os
 import json
 
 from lib.helpers.FilesWalker import FilesWalker
 from lib.helpers.TimeLogger import TimeLogger
 
 
-def normalize(input_folder, all_features_file):
+def normalize(input_folder, output_folder, all_features_file, normalize_type):
     with open(all_features_file, 'r') as all_features_file_descriptor:
         all_features_json = all_features_file_descriptor.read()
         all_features = json.loads(all_features_json)
@@ -19,12 +20,15 @@ def normalize(input_folder, all_features_file):
                 if feature not in features:
                     features[feature] = 0
 
-            for feature in features:
-                features[feature] /= len(features)
+            if normalize_type == 'matrix':
+                feature_values = [value for (key, value) in sorted(features.items())]
+            else:
+                feature_values = features
 
-            features_file_descriptor.seek(0)
-            features_file_descriptor.write(json.dumps(features))
-            features_file_descriptor.truncate()
+            relative_filename = os.path.relpath(filename, input_folder)
+            output_file = output_folder + '/' + relative_filename
+            with open(output_file, 'w') as features_normalized_file_descriptor:
+                features_normalized_file_descriptor.write(json.dumps(feature_values))
 
         print(filename + ' normalize completed. Time: ' + str(tl.finish()))
 

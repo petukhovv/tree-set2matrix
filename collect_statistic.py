@@ -1,0 +1,33 @@
+import json
+import operator
+
+from lib.helpers.TimeLogger import TimeLogger
+
+
+def collect_statistic(output_folder, all_features_file, ns):
+    tl = TimeLogger()
+    f = open(all_features_file, 'r')
+    features = json.loads(f.read())
+    f.close()
+
+    grams = {}
+    for n in ns:
+        grams[int(n)] = {}
+
+    for feature in features:
+        n = len(feature.split(':'))
+        if n in grams:
+            grams[n][feature] = features[feature]
+
+    all_grams = {}
+    for n in grams:
+        all_grams = {**all_grams, **grams[n]}
+        grams_sorted = sorted(grams[n].items(), key=operator.itemgetter(1))
+        with open(output_folder + '/all_features_sorted' + str(n) + '.json', 'w') as grams_file_descriptor:
+            grams_file_descriptor.write(json.dumps(grams_sorted))
+
+    all_grams_sorted = sorted(all_grams.items(), key=operator.itemgetter(1))
+    with open(output_folder + '/all_features_sorted.json', 'w') as grams_file_descriptor:
+        grams_file_descriptor.write(json.dumps(all_grams_sorted))
+
+    print('Collect statistic completed. Time: ' + str(tl.finish()))
