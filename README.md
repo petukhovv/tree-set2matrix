@@ -16,4 +16,9 @@ Available steps (stages):
 * **-o, --output_folder**: output folder with "vectors" (but actually is map "feature-value");
 * **--ast2vec_path**: path to [ast2vec](https://github.com/PetukhovVictor/ast2vec)
 
-Also see ast2vec README: https://github.com/PetukhovVictor/ast2vec
+Also see ast2vec README: https://github.com/PetukhovVictor/ast2vec (ASTs format, output format, etc)
+
+#### Example of use
+```
+python3 main.py -i ./ast -o ./test -s asts2vectors --ast2vec_path ../ast2vec/
+```
