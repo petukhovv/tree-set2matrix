@@ -1,3 +1,4 @@
+import os
 import json
 import operator
 
@@ -5,6 +6,9 @@ from lib.helpers.TimeLogger import TimeLogger
 
 
 def collect_statistic(output_folder, all_features_file, ns):
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+
     tl = TimeLogger()
     f = open(all_features_file, 'r')
     features = json.loads(f.read())

@@ -29,7 +29,10 @@ def collect_features_statistic(features_file, all_features_file):
             all_features_file_descriptor.truncate()
 
 
-def asts2vectors(input_folder, output_folder, ast2vec_path, all_features_file):
+def asts2vectors(input_folder, output_folder, ast2vec_path):
+    all_features_file = output_folder + '/all_features.json'
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
     if not path.isfile(all_features_file):
         open(all_features_file, 'a').close()
 
