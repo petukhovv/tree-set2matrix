@@ -30,6 +30,9 @@ def sparse_transform(input_folder, output_folder, all_features_file, sparse_form
 
             relative_filename = os.path.relpath(filename, input_folder)
             output_file = output_folder + '/' + relative_filename
+            file_folder = os.path.dirname(output_folder + '/' + relative_filename)
+            if not os.path.exists(file_folder):
+                os.makedirs(file_folder)
             with open(output_file, 'w') as features_sparsed_file_descriptor:
                 features_sparsed_file_descriptor.write(json.dumps(feature_values))
 
