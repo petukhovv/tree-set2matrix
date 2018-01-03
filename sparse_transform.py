@@ -19,14 +19,14 @@ def sparse_transform(input_folder, output_folder, all_features_file, sparse_form
             features_json = features_file_descriptor.read()
             features = json.loads(features_json)
 
+            features_sparsed = {}
             for feature in all_features:
-                if feature not in features:
-                    features[feature] = 0
+                features_sparsed[feature] = features[feature] if feature in features else 0
 
             if sparse_format == 'list':
-                feature_values = [value for (key, value) in sorted(features.items())]
+                feature_values = [value for (key, value) in sorted(features_sparsed.items())]
             else:
-                feature_values = features
+                feature_values = features_sparsed
 
             relative_filename = os.path.relpath(filename, input_folder)
             output_file = output_folder + '/' + relative_filename
