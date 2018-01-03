@@ -41,7 +41,7 @@ If the 'list' was specified (for example):
 ```
 [4, 0, 0, 11, 0, 0, 0, 12, 0, 0, 0, 0, 65, 4, 0, 0, 0, 0, 0, 91, 0, 1, 0, 0, 0, 0, 0, 0, 45, 0, 0, 103, 0, 0, 0, 0, 0, 9, 3]
 ```
-Order elements same as in all features file.
+The elements are sorted **by names** of features.
 
 If the 'map' was specified (for example):
 ```
