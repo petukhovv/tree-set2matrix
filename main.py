@@ -19,7 +19,7 @@ parser.add_argument('--output_file', nargs=1, type=str,
                     help='path to output matrix file (dataset.json (vectors2matrix stage)'
                          ', dataset.csv (matrix2csv stage), for example)')
 parser.add_argument('--input_file', nargs=1, type=str,
-                    help='path to output matrix file (dataset.json, for example)')
+                    help='path to input matrix file (dataset.json, for example)')
 parser.add_argument('-n', nargs='*', default=[1, 2, 3], help='n for collect n-grams statistic')
 parser.add_argument('--stage', '-s',
                     choices=['asts2vectors', 'sparse_transformation',
