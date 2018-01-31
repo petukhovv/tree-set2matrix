@@ -17,7 +17,7 @@ Available steps (stages):
 * **-s, --stage** -> asts2vectors;
 * **-i, --input_folder**: input folder with ASTs (in JSON format);
 * **-o, --output_folder**: output folder with "vectors" (but actually is map "feature-value");
-* **-f, --features_file**: path to file with feature list (feature list format see [here](https://github.com/PetukhovVictor/ast2vec#feature-configuration)
+* **-f, --features_file**: path to file with feature list (feature list format see [here](https://github.com/PetukhovVictor/ast2vec#feature-configuration))
 
 Stage uses [ast2vec](https://github.com/PetukhovVictor/ast2vec) as submodule, also see [ast2vec README](https://github.com/PetukhovVictor/ast2vec) (ASTs format, output format, etc).
 
