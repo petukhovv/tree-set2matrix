@@ -16,6 +16,9 @@ def sparse_transform(input_folder, output_folder, all_features_file, sparse_form
         all_features = json.loads(all_features_json)
 
     def ast_file_process(filename, all_features):
+        if filename == all_features_file:
+            return
+
         time_logger_file = TimeLogger()
         with open(filename, 'r+') as features_file_descriptor:
             features_json = features_file_descriptor.read()
