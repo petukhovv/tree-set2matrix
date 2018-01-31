@@ -1,0 +1,3 @@
+[submodule "lib/ast2vec"]
+	path = lib/ast2vec
+	url = https://github.com/PetukhovVictor/ast2vec.git

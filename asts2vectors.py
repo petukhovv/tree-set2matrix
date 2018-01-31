@@ -1,13 +1,9 @@
 import os
-import subprocess
 import json
-from pprint import pprint
-from os import path
 
 from lib.helpers.FilesWalker import FilesWalker
 from lib.helpers.TimeLogger import TimeLogger
-
-python_interpreter = 'python3'
+from lib.ast2vec.feature_extractor import feature_extractor
 
 
 def collect_features_statistic(features_file, all_features_file):
@@ -29,12 +25,16 @@ def collect_features_statistic(features_file, all_features_file):
             all_features_file_descriptor.truncate()
 
 
-def asts2vectors(input_folder, output_folder, ast2vec_path):
+def asts2vectors(input_folder, output_folder, features_file):
     all_features_file = output_folder + '/all_features.json'
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
-    if not path.isfile(all_features_file):
-        open(all_features_file, 'a').close()
+    if not os.path.isfile(all_features_file):
+        with open(all_features_file, 'w') as all_features_file_descriptor:
+            all_features_file_descriptor.write(json.dumps({}))
+
+    with open(features_file, 'r') as features_file_descriptor:
+        features = json.loads(features_file_descriptor.read())
 
     def ast_file_process(filename):
         tl = TimeLogger()
@@ -43,9 +43,11 @@ def asts2vectors(input_folder, output_folder, ast2vec_path):
         output_folders = os.path.dirname(output_file)
         if not os.path.exists(output_folders):
             os.makedirs(output_folders)
-        subprocess.call([python_interpreter, ast2vec_path + '/main.py',
-                         '-i', filename, '-o', output_file, '--no_normalize'])
+
+        feature_extractor(filename, features, output_file)
+
         collect_features_statistic(output_file, all_features_file)
+
         print(output_file + ' feature extraction completed. Time: ' + str(tl.finish()))
 
     FilesWalker.walk(input_folder, ast_file_process)
