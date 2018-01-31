@@ -1,8 +1,8 @@
 import os
 import json
 
-from lib.helpers.FilesWalker import FilesWalker
-from lib.helpers.TimeLogger import TimeLogger
+from .lib.helpers.FilesWalker import FilesWalker
+from .lib.helpers.TimeLogger import TimeLogger
 
 JSON_LEFT_ARRAY_BRACKET = '['
 JSON_RIGHT_ARRAY_BRACKET = ']'

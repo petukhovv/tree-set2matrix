@@ -1,8 +1,8 @@
 import os
 import json
 
-from lib.helpers.FilesWalker import FilesWalker
-from lib.helpers.TimeLogger import TimeLogger
+from .lib.helpers.FilesWalker import FilesWalker
+from .lib.helpers.TimeLogger import TimeLogger
 
 
 def sparse_transform(input_folder, output_folder, all_features_file, sparse_format):

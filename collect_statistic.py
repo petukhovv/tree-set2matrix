@@ -2,7 +2,7 @@ import os
 import json
 import operator
 
-from lib.helpers.TimeLogger import TimeLogger
+from .lib.helpers.TimeLogger import TimeLogger
 
 
 def collect_statistic(output_folder, all_features_file, ns):

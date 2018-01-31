@@ -1,9 +1,9 @@
 import os
 import json
 
-from lib.helpers.FilesWalker import FilesWalker
-from lib.helpers.TimeLogger import TimeLogger
-from lib.ast2vec.feature_extractor import feature_extractor
+from .lib.helpers.FilesWalker import FilesWalker
+from .lib.helpers.TimeLogger import TimeLogger
+from .lib.ast2vec.feature_extractor import feature_extractor
 
 
 def collect_features_statistic(features_file, all_features_file):
