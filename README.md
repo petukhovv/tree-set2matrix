@@ -21,11 +21,26 @@ Available steps (stages):
 
 Stage uses [ast2vec](https://github.com/PetukhovVictor/ast2vec) as submodule, also see [ast2vec README](https://github.com/PetukhovVictor/ast2vec) (ASTs format, output format, etc).
 
-At this stage a file with all features is generated (all_features.json in the output folder). **This file required in the next stages.**
+At this stage a file with all features statistic is generated (all_features.json in the output folder). **This file required in the next stages.**
 
 #### Example of use
 ```
 python3 main.py -s asts2vectors -i ./ast -o ./ast_vectors --features_file features_config.json
+```
+
+#### Example features config
+```
+[
+    {
+       "type": "all_ngrams",
+       "params": {
+           "n": 3,
+           "max_distance": 3,
+           "no_normalize": true,
+           "exclude": [["FUN"]]
+       }
+   }
+]
 ```
 
 ### Sparse transformation
