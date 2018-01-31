@@ -26,6 +26,8 @@ def collect_features_statistic(features_file, all_features_file):
 
 
 def asts2vectors(input_folder, output_folder, features_file):
+    time_logger = TimeLogger()
+
     all_features_file = output_folder + '/all_features.json'
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
@@ -37,7 +39,7 @@ def asts2vectors(input_folder, output_folder, features_file):
         features = json.loads(features_file_descriptor.read())
 
     def ast_file_process(filename):
-        tl = TimeLogger()
+        time_logger_file = TimeLogger()
         relative_filename = os.path.relpath(filename, input_folder)
         output_file = output_folder + '/' + relative_filename
         output_folders = os.path.dirname(output_file)
@@ -48,6 +50,8 @@ def asts2vectors(input_folder, output_folder, features_file):
 
         collect_features_statistic(output_file, all_features_file)
 
-        print(output_file + ' feature extraction completed. Time: ' + str(tl.finish()))
+        time_logger_file.finish(task_name='Feature extraction in %s' % filename)
 
     FilesWalker.walk(input_folder, ast_file_process)
+
+    time_logger.finish(task_name='Feature extraction', full_finish=True)

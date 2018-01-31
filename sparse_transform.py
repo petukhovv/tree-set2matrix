@@ -6,6 +6,8 @@ from .lib.helpers.TimeLogger import TimeLogger
 
 
 def sparse_transform(input_folder, output_folder, all_features_file, sparse_format):
+    time_logger = TimeLogger()
+
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
@@ -14,7 +16,7 @@ def sparse_transform(input_folder, output_folder, all_features_file, sparse_form
         all_features = json.loads(all_features_json)
 
     def ast_file_process(filename, all_features):
-        tl = TimeLogger()
+        time_logger_file = TimeLogger()
         with open(filename, 'r+') as features_file_descriptor:
             features_json = features_file_descriptor.read()
             features = json.loads(features_json)
@@ -36,6 +38,8 @@ def sparse_transform(input_folder, output_folder, all_features_file, sparse_form
             with open(output_file, 'w') as features_sparsed_file_descriptor:
                 features_sparsed_file_descriptor.write(json.dumps(feature_values))
 
-        print(filename + ' sparse transformation completed. Time: ' + str(tl.finish()))
+        time_logger_file.finish(task_name='Sparse transformation in %s' % filename)
 
     FilesWalker.walk(input_folder, lambda filename: ast_file_process(filename, all_features))
+
+    time_logger.finish(task_name='Feature extraction', full_finish=True)

@@ -9,7 +9,7 @@ def collect_statistic(output_folder, all_features_file, ns):
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
-    tl = TimeLogger()
+    time_logger = TimeLogger()
     f = open(all_features_file, 'r')
     features = json.loads(f.read())
     f.close()
@@ -34,4 +34,4 @@ def collect_statistic(output_folder, all_features_file, ns):
     with open(output_folder + '/all_features_sorted.json', 'w') as grams_file_descriptor:
         grams_file_descriptor.write(json.dumps(all_grams_sorted))
 
-    print('Collect statistic completed. Time: ' + str(tl.finish()))
+    time_logger.finish(task_name='Collect statistic', full_finish=True)
