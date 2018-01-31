@@ -3,15 +3,16 @@ import datetime
 
 
 class TimeLogger:
-    def __init__(self, accuracy=3):
+    def __init__(self, task_name, accuracy=3):
+        self.task_name = task_name
         self.start_time = time.time()
         self.accuracy = accuracy
 
-    def finish(self, task_name, full_finish=False):
+    def finish(self, full_finish=False):
         seconds = round(time.time() - self.start_time, self.accuracy)
         if full_finish:
             print('-------------------')
-        print('%s finished. Time: %s' % (task_name, str(datetime.timedelta(seconds=seconds))))
+        print('%s finished. Time: %s' % (self.task_name, str(datetime.timedelta(seconds=seconds))))
         if full_finish:
             print('-------------------')
 

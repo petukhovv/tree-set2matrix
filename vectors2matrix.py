@@ -17,7 +17,7 @@ def create_file_if_needed(output_file):
 
 
 def vectors2matrix(input_folder, output_file):
-    time_logger = TimeLogger()
+    time_logger = TimeLogger(task_name='Vectors to matrix transformation')
 
     output_folder = os.path.dirname(output_file)
     if not os.path.exists(output_folder):
@@ -28,7 +28,7 @@ def vectors2matrix(input_folder, output_file):
     }
 
     def vectors_file_process(filename, params):
-        time_logger_file = TimeLogger()
+        time_logger_file = TimeLogger(task_name='Vectors to matrix transformation in %s' % filename)
         with open(filename, 'r') as vector_file_descriptor:
             vector_json = vector_file_descriptor.read()
 
@@ -38,7 +38,7 @@ def vectors2matrix(input_folder, output_file):
                 prefix = JSON_LEFT_ARRAY_BRACKET if is_beginning else JSON_COLON
                 output_file_descriptor.write(prefix + vector_json)
 
-        time_logger_file.finish(task_name='Vectors to matrix transformation in %s' % filename)
+        time_logger_file.finish()
 
         params['files_map'].append(filename)
 
@@ -50,4 +50,4 @@ def vectors2matrix(input_folder, output_file):
     with open(output_folder + '/files_map.json', 'w') as files_map_file_descriptor:
         files_map_file_descriptor.write(json.dumps(params['files_map']))
 
-    time_logger.finish(task_name='Vectors to matrix transformation', full_finish=True)
+    time_logger.finish(full_finish=True)
