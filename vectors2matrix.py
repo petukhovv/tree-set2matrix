@@ -40,7 +40,8 @@ def vectors2matrix(input_folder, output_file):
 
         time_logger_file.finish()
 
-        params['files_map'].append(filename)
+        relative_filename = os.path.relpath(filename, input_folder)
+        params['files_map'].append(relative_filename)
 
     FilesWalker.walk(input_folder, lambda filename: vectors_file_process(filename, params))
 
