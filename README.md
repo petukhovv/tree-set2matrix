@@ -17,15 +17,15 @@ Available steps (stages):
 * **-s, --stage** -> asts2vectors;
 * **-i, --input_folder**: input folder with ASTs (in JSON format);
 * **-o, --output_folder**: output folder with "vectors" (but actually is map "feature-value");
-* **--ast2vec_path**: path to [ast2vec](https://github.com/PetukhovVictor/ast2vec)
+* **-f, --features_file**: path to file with feature list (feature list format see [here](https://github.com/PetukhovVictor/ast2vec#feature-configuration)
 
-Also see ast2vec README: https://github.com/PetukhovVictor/ast2vec (ASTs format, output format, etc)
+Stage uses [ast2vec](https://github.com/PetukhovVictor/ast2vec) as submodule, also see [ast2vec README](https://github.com/PetukhovVictor/ast2vec) (ASTs format, output format, etc).
 
 At this stage a file with all features is generated (all_features.json in the output folder). **This file required in the next stages.**
 
 #### Example of use
 ```
-python3 main.py -s asts2vectors -i ./ast -o ./ast_vectors --ast2vec_path ../ast2vec/
+python3 main.py -s asts2vectors -i ./ast -o ./ast_vectors --features_file features_config.json
 ```
 
 ### Sparse transformation
