@@ -6,7 +6,7 @@ from .lib.helpers.TimeLogger import TimeLogger
 
 
 def sparse_transform(input_folder, output_folder, all_features_file, sparse_format):
-    time_logger = TimeLogger(task_name='Feature extraction')
+    time_logger = TimeLogger(task_name='Sparse transformation')
 
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
