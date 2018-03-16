@@ -3,7 +3,7 @@ import json
 
 from .lib.helpers.FilesWalker import FilesWalker
 from .lib.helpers.TimeLogger import TimeLogger
-from .lib.ast2vec.feature_extractor import feature_extractor
+from .lib.tree2vec.feature_extractor import feature_extractor
 
 
 def collect_features_statistic(features_file, all_features_file):
@@ -25,7 +25,7 @@ def collect_features_statistic(features_file, all_features_file):
             all_features_file_descriptor.truncate()
 
 
-def asts2vectors(input_folder, output_folder, features_file):
+def trees2vectors(input_folder, output_folder, features_file):
     time_logger = TimeLogger(task_name='Feature extraction')
 
     all_features_file = output_folder + '/all_features.json'
@@ -38,7 +38,7 @@ def asts2vectors(input_folder, output_folder, features_file):
     with open(features_file, 'r') as features_file_descriptor:
         features = json.loads(features_file_descriptor.read())
 
-    def ast_file_process(filename):
+    def tree_file_process(filename):
         time_logger_file = TimeLogger(task_name='Feature extraction in %s' % filename)
         relative_filename = os.path.relpath(filename, input_folder)
         output_file = output_folder + '/' + relative_filename
@@ -52,6 +52,6 @@ def asts2vectors(input_folder, output_folder, features_file):
 
         time_logger_file.finish()
 
-    FilesWalker.walk(input_folder, ast_file_process)
+    FilesWalker.walk(input_folder, tree_file_process)
 
     time_logger.finish(full_finish=True)
